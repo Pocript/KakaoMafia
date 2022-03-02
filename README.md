@@ -13,3 +13,4 @@
 ![Image](https://raw.githubusercontent.com/Pocript/KakaoMafia/main/resource/Screenshot_20220302-144013_Chrome.jpg)
 
 7. 여러사람들과 함께 사용하고 싶다면 꼭 포트포워딩을 해주세요.
+8. 메신저봇에 넣은 소스 19번째 줄에는 포트포워딩 한뒤 서버 주소를 넣으시면 됩니다.
