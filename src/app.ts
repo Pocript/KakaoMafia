@@ -17,8 +17,7 @@ var io = require('socket.io')(server);
 app.use(express.json()); 
 app.use(express.urlencoded( {extended : false } ));
 
-
-app.set('player', [{nick:'플레이어1',ip:'123.456.5'},{nick:'플레이어2',ip:'123.456.5'},{nick:'플레이어3',ip:'127.0..1',role:'의사'}]);
+app.set('player', []);
 app.set('killed',undefined)
 app.set('state',undefined)
 app.set('initPlayer',undefined)
