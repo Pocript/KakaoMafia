@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/style.css">
+    </head>
+    <body>
+        <div id="regist_wrap">
+            <input id="nickname" type="text" placeholder="오픈채팅 닉네임"/>
+            <div><button onclick="submit()" id="regist_submit">게임참여</button></div>
+        </div>
+    </body>
+    
+    <script>
+        function submit(){
+            var nick = $('#nickname').val()
+            $.ajax({
+	            type: "POST", //요청 메소드 방식
+	            url:"/regist",
+	            dataType:"text", 
+	            data:{
+	              'nick':nick  
+	            },
+	            success : function(result){
+	                if(result==='already'){
+	                    alert('이미 참여했습니다.')
+	                    return;
+	                }else if(result==='already nick'){
+	                    alert('이미 존재하는 닉네임입니다. 닉네임을 바꿔주세요.')
+	                    return;
+	                }else if(result==='exceed'){
+	                    alert('인원이 다 찼습니다.')
+	                    return;
+	                }
+		            location.href = 'http://asj.dothome.co.kr/?kakaotalk://inappbrowser/close'
+	           },
+	            error : function(a, b, c){
+		            alert(a + b + c);
+	           }
+            });
+        }
+    </script>
+</html>
