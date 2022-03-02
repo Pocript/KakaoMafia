@@ -1,5 +1,5 @@
 /**Made By IMIS
-*KakaoMable 1.0
+*Mafia 1.0
 **/
 const scriptName = "";
 const version = "1.0";
