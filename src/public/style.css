@@ -1,0 +1,130 @@
+body{
+    padding: 0;
+    margin: 0;
+    background:#170d0e;
+}
+#nickname{
+    width:30rem;
+    height: 3rem;
+    border-radius: 2rem;
+    font-size: 2rem;
+    padding-left: 1rem;
+    background: #5d1210;
+    color: white;
+    border: 0.1rem solid white;
+}
+#nickname::placeholder {color:#e2e2e2;}
+#nickname::-webkit-input-placeholder {color:#e2e2e2;}
+#nickname:-ms-input-placeholder {color:#e2e2e2;}
+
+
+#regist_wrap{
+    padding: 10rem;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+#regist_submit{
+    width: 20rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    display: block;
+    margin: 0 auto;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    background: #5d1210;
+    color: white;
+    border: 0.1rem solid white;
+}
+#role_wrap{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+#roleBlock{
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+#elseMafia{
+    color: white;
+    font-size: 2rem;
+    font-weight: 900;
+}
+#voteBlock{
+    display: inline-block;
+    border: 1px solid white;
+    width: 30vw;
+    height: 30vw;
+}
+
+#voteBox{
+    position: absolute;
+    width: 100vw;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}
+#chatLogs{
+    background: black;
+    width: 100vw;
+    height: calc(100vh - 13rem);
+    color: white;
+    padding-top: 2rem;
+    font-size: 1.2rem;
+    overflow: scroll;
+}
+#msg{
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 2.5rem;
+    background: #5d1210;
+    color: white;
+    border: 0.1rem solid white;
+    font-size: 1.5rem;
+    z-index: 4;
+}
+#player{
+    z-index: 2;
+    position:absolute;
+    color: white;
+    top: 0;
+    right: 0;
+    width: 10rem;
+    height: 100vh;
+    background: black;
+    display: none;
+}
+.player-btn{
+    width: 2rem;
+    height: 3rem;
+    position: absolute;
+    background: #5d1210;
+    top: 40%;
+    margin-left: -2rem;
+    border: 0.2rem solid white;
+    text-align: center;
+    line-height: 3rem;
+    font-size: 1.5rem;
+    font-weight:800;
+}
+#player-close{
+    right: 0;
+}
+#playerBackground{
+    background: rgba(0,0,0,0.7);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    display: none;
+}

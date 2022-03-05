@@ -1,0 +1,47 @@
+ <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/style.css">
+    </head>
+<body>
+    <div id="role_wrap">
+         <div id="roleBlock"></div>
+         
+        <% if(role==='당신의 직업은 마피아 입니다'){ %>
+           <div id="elseMafia"></div>
+        <% } %>
+    </div>
+   <script>
+var typingBool = false; 
+var typingIdx=0; 
+
+// 타이핑될 텍스트를 가져온다 
+var typingTxt = "<%= role %>"
+
+typingTxt=typingTxt.split(""); // 한글자씩 자른다. 
+
+if(typingBool==false){ 
+  // 타이핑이 진행되지 않았다면 
+   typingBool=true;     
+   var tyInt = setInterval(typing,100); // 반복동작 
+} 
+     
+function typing(){ 
+  if(typingIdx<typingTxt.length){ 
+    // 타이핑될 텍스트 길이만큼 반복 
+    $("#roleBlock").append(typingTxt[typingIdx]);
+    // 한글자씩 이어준다. 
+    typingIdx++; 
+   } else{ 
+     //끝나면 반복종료 
+    clearInterval(tyInt); 
+    mafiaTyping()
+   } 
+} 
+
+
+function mafiaTyping(){ 
+  if(!$("#elseMafia")) return;
+    $("#elseMafia").append('또 다른마피아: <%= elseMafia %>');
+}  
+   </script>
+</body>

@@ -1,0 +1,118 @@
+<head>
+    <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <style>
+        input[type="checkbox"]{
+        display: none;
+      }
+input[type="checkbox"] + label{
+        width: 24vw;
+        height: 24vw;
+        border:0.25rem solid gray;
+        border-right:0.25rem solid gray;
+        position: relative;
+      }
+input[type="checkbox"]:checked + label::after{
+        content:'';
+        background-image:url(/static/vote.png);
+        background-size:100% auto;
+        font-size: 25px;
+        width: 24vw;
+        height: 24vw;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        top:0
+      }
+      label{
+          display: block;
+          float: left;
+          font-size: 2rem;
+        }
+      #submit{
+          width: 20rem;
+          height: 2.5rem;
+          border: none;
+          border-radius: 0.5rem;
+          
+          margin: 0 auto;
+          margin-top: 2rem;
+          font-size: 1.5rem;
+          background: #5d1210;
+          color: white;
+          border: 0.1rem solid white;
+          
+      }
+    </style>
+</head>
+<body>
+<div>
+    <h1>투표를 해주세요.</h1>
+    <div id="voteBox">
+       <div id="inlineVote">
+                 <% map = player.map((e,i)=> {
+        if(i===0){
+            return '<input type="checkbox" name="form" value="'+e.nick+'" checked id="'+i+'"/><label for="'+i+'">'+e.nick+'</label>' 
+        }
+        
+        if(ip===e.ip){
+            return '<input type="checkbox" name="form" value="'+e.nick+'" id="'+i+'"/><label for="'+i+'">'+e.nick+'(나)</label>' 
+        }else{
+            return '<input type="checkbox" name="form" value="'+e.nick+'" id="'+i+'"/><label for="'+i+'">'+e.nick+'</label>' 
+        }
+    }) %>
+    <%- map.join('') %> 
+    <div><button id="submit" onclick="submit()">완료</button></div>
+       </div> 
+    
+    </div>
+    
+</div>
+<script>
+ 
+ var checked;
+ function submit(){
+     $("input:checkbox[name=form]:checked").each(function(){
+    	checked = $(this).val();
+    	
+    	$.ajax({
+	            type: "POST", //요청 메소드 방식
+	            url:"/vote",
+	            dataType:"text", 
+	            data:{
+	              'checked':checked  
+	            },
+	            success : function(result){
+	                if(result==='already'){
+	                    alert('이미 투표했습니다..')
+	                    return;
+	                }else{
+		            alert(checked+" 에 투표했습니다.")
+	                }
+	           },
+	            error : function(a, b, c){
+		            alert(a + b + c);
+	           }
+            });
+    });
+ }
+ 
+$(document).ready(function() {
+ 
+ $('input[type="checkbox"][name="form"]').click(function(){
+ 
+  if($(this).prop('checked')){
+ 
+     $('input[type="checkbox"][name="form"]').prop('checked',false);
+ 
+     $(this).prop('checked',true);
+ 
+    }
+  
+   });
+  
+ });
+   
+</script>
+
+</body>

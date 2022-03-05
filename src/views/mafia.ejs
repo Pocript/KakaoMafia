@@ -1,0 +1,81 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <style>
+        body{
+            background: #261616;
+        }
+        #submit{
+            position: absolute;
+            width: 3rem;
+            height: 2.5rem;
+            z-index: 10;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    </div>
+    <div id="chatLogs"><div>아래 채팅에서 죽일 사람을 상의한 뒤 채팅창에 /지목 [닉네임] 을 입력해주세요</div>
+    <div class="player-btn" id="player-close" onclick="playerPop()"><</div>
+    </div>
+    <button id="submit" onclick="submit()">전송</button>
+    <input type="text" id="msg" onKeyPress="if (event.keyCode==13){submit();}"/>
+    
+    <% map = player.map(e=> {
+        if(ip===e.ip){
+            return '<div>'+e.nick+' (나) </div>' 
+        }else if("마피아"===e.role){
+            return '<div>'+e.nick+' (마피아) </div>' 
+        }else{
+            return '<div>'+e.nick+'</div>' 
+        }
+    }) %>
+    <div id="playerBackground"></div>
+    <div id="player">
+        <div class="player-btn" onclick="playerHide()">></div>
+         <div><h3>/지목 [죽일사람] 을 입력</h3></div>
+    <div><%- map.join('') %></div>
+    </div>
+   
+<script>
+
+    var socket = io();
+    
+    socket.emit("login", '<%=me.nick%>');
+    socket.on("con", function(data) {
+      $("#chatLogs").append("<div>" + data + "님이 접속했습니다.</div>")
+      .stop()
+      .animate({ scrollTop: $('#chatLogs')[0].scrollHeight }, 1000);
+    });
+    socket.on("message", function(nick,msg) {
+      $("#chatLogs").append("<div>" + nick+': '+msg +"</div>")
+      .stop()
+      .animate({ scrollTop: $('#chatLogs')[0].scrollHeight }, 1000);
+    });
+    socket.on("server", function(msg) {
+      $("#chatLogs").append('<div> 서버: '+msg +"</div>")
+      .stop()
+      .animate({ scrollTop: $('#chatLogs')[0].scrollHeight }, 1000);
+    });
+    function submit(){
+        if($("#msg").val() === '') return;
+        socket.emit("message", '<%=me.nick%>',$("#msg").val());
+        $("#msg").val('')
+    }
+    function playerPop(){
+        $("#player").show()
+        $("#playerBackground").show()
+        $("#player-close").hide()
+    }
+    function playerHide(){
+        $("#player").hide()
+        $("#playerBackground").hide()
+        $("#player-close").show()
+    }
+</script>
+</body>
