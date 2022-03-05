@@ -4,7 +4,7 @@
 const scriptName = "";
 const version = "1.0";
 const SECRET = require("secret");
-const roomName = '소통방'
+const roomName = '카카오톡으로 하는 마피아게임'
 importPackage(javax.net.ssl);
 importPackage(java.lang);
 importPackage(java.net);
@@ -14,9 +14,9 @@ importPackage(org.jsoup);
 
 
 const { KakaoLinkClient } = require('kakaolink'); 
-const Kakao = new KakaoLinkClient("js-key", 'url');
+const Kakao = new KakaoLinkClient("", "");
 Kakao.login(SECRET.EMAIL, SECRET.PASSWORD); 
-const host = 'host'
+const host = ''
 
 /* ---------------------------------------------------------------------------- */
 
@@ -206,7 +206,6 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
   
 }
 
-const socket = new DatagramSocket(3003);
 
 let voteTimerPower = false;
 let voteTimerCount = 0
@@ -300,7 +299,6 @@ Bot.reply(e);
 
 function onStartCompile() 
 { 
-  socket.close()
   voteTimerPower = false;
   votePower = false;
   state = false; 
