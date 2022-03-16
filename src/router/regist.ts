@@ -40,7 +40,7 @@ router.post("/", (req: Request, res: Response, next: NextFunction) => {
     }
     
     var message = new Buffer(encodeURIComponent(JSON.stringify({type:'regist',nick:req.body.nick,ip:ip})));
-    player.push({nick:req.body.nick,ip:ip})
+    player.unshift({nick:req.body.nick,ip:ip})
     req.app.set('player',player)
     
     var client = dgram.createSocket('udp4');
